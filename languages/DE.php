@@ -57,6 +57,7 @@ $this->Items['com.sbb.profile.signature']			= 'Signatur';
 $this->Items['com.sbb.board.empty']					= 'Zurzeit ist das Board leer.';
 $this->Items['com.sbb.board.not_categorized']		= 'Nicht Kategorisiert';
 $this->Items['com.sbb.board.error.no_board']		= 'Das Forum existiert nicht';
+
 $this->Items['com.sbb.topics.error.no_topics']		= 'Es gibt keine Themen.';
 
 $this->Items['com.sbb.captcha']						= 'Captcha';
@@ -64,5 +65,8 @@ $this->Items['com.sbb.captcha.wrong']				= 'Captcha ist falsch!';
 
 $this->Items['com.sbb.language.changed']			= 'Deine Sprache wurde nach {$LangChangedTo} geÃ¤ndert';
 
-$this->Items['com.sbb.email.activation.title']		= 'Dein Account wird freigeschaltet sobald du folgende Adresse besucht hast: ';
+$this->Items['com.sbb.email.activation.title']		= 'Du must diesen Link klicken um deine Registrierung abzuschließen: ';
+
+$this->Items['com.sbb.error.mysql.connecting']		= 'Es kann keine Verbindung zum MySQL-Server aufgebaut werden. Bitte kontaktieren sie den Admin.';
+$this->Items['com.sbb.error.mysql.settings']		= 'Bitte überprüfen sie die MySQL-Einstellungen.';
 ?>

@@ -21,8 +21,10 @@ class mysql{
 		self::$Password	= $Password;
 		self::$Database	= $Database;
     
-		self::DoConnect();
-		self::SelectDB();
+		if(!self::DoConnect())
+			return false;
+		if(!self::SelectDB())
+			return false;
 	}
 	
 	public static function Query($Query) {
@@ -142,14 +144,15 @@ class mysql{
 	private static function DoConnect() {
 		$Connect = @mysql_connect(self::$Host, self::$Username, self::$Password);
 		if(!$Connect) {
-			die('<h2>Fatal Error:</h2>'."\n".
+			/*die('<h2>Fatal Error:</h2>'."\n".
 				'	<strong>Couldn\'t connect to the MySQL-User \''.self::$Username.'\'!</strong><br>'."\n".
 				'	<strong>Errorcode</strong>: '.mysql_errno().'<br>'."\n".
 				'	<strong>Error</strong>: '.mysql_error().'<br>'."\n".
 				'	<strong>Site</strong>: '.(isset($_SERVER['REQUEST_URI']) && !empty($_SERVER['REQUEST_URI']) ?
 												htmlentities($_SERVER['REQUEST_URI']) : '-').'<br>'."\n".
 				'	<strong>Referrer</strong>: '.(isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER']) ?
-													htmlentities($_SERVER['HTTP_REFERER']) : '-'));
+													htmlentities($_SERVER['HTTP_REFERER']) : '-'));*/
+			return false;
 		}
 		return true;
 	}
@@ -157,14 +160,15 @@ class mysql{
 	private static function SelectDB() {
 		$Select = @mysql_select_db(self::$Database);
 		if(!$Select) {
-			die('<h2>Fatal Error:</h2>'."\n".
+			/*die('<h2>Fatal Error:</h2>'."\n".
 				'	<strong>Can\'t find database \''.self::$Database.'\'!</strong><br>'."\n".
 				'	<strong>Errorcode</strong>: '.mysql_errno().'<br>'."\n".
 				'	<strong>Error</strong>: '.mysql_error().'<br>'."\n".
 				'	<strong>Site</strong>: '.(isset($_SERVER['REQUEST_URI']) && !empty($_SERVER['REQUEST_URI']) ?
 												htmlentities($_SERVER['REQUEST_URI']) : '-').'<br>'."\n".
 				'	<strong>Referrer</strong>: '.(isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER']) ?
-													htmlentities($_SERVER['HTTP_REFERER']) : '-'));
+													htmlentities($_SERVER['HTTP_REFERER']) : '-'));*/
+			return false;
 		}
 		return true;
 	}

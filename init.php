@@ -7,28 +7,48 @@
  * @version		Revision: 16
  */
 
-// Error reporting
+// Error Reporting | Just For Dev-Version
 ini_set('display_errors', 1);
 error_reporting(E_ALL ^ E_NOTICE | E_STRICT);
 
-// Include required files
+// Include Required Files
 require_once('config.inc.php');
 require_once('constants.inc.php');
 require_once('functions.inc.php');
 
 // Initial
-date_default_timezone_set('Europe/Berlin');	// default timezone (for date functions)
-session_start();	// Start Session
+date_default_timezone_set('Europe/Berlin');
+session_start();
 
-mysql::Connect($CFG_Host, $CFG_User, $CFG_Password, $CFG_Database);	// Connect to MySQL-Database
-user::Initial();	// Initial Usermanagement
-page::$Info['Site'] = 'Home';	// Info Variables
-crumb::Add('{lang=com.sbb.crumbs.home}', './');	// Breadcrumbstart
-login::AutoLogout();			// after 10 minutes you will automatically logged out
+// Initial Classes
+$language = new language();
+$tpl = new template('case');
 
-$Group = groups::GetRights();	// Get The Rights. Not useful at this moment
-$language = new language();		// Load language management
-$tpl = new template('case');	// Load template management
+// Connecting To MySQL Server
+if($MySQL['HOST'] || $MySQL['USER'] || $MySQL['DB'] != '') {
+	if(!mysql::Connect($MySQL['HOST'], $MySQL['USER'], $MySQL['PW'], $MySQL['DB']))
+		new messagebox(MSG_BOX_TYPE_ERROR, '{lang=com.sbb.error.mysql.connecting}');
+} else {
+	new messagebox(MSG_BOX_TYPE_ERROR, '{lang=com.sbb.error.mysql.settings}');
+}
+
+// Check If User Exist And Is Logged In
+user::Initial();
+
+// Will Open A Specific Page
+page::Initial($tpl);
+
+// Automatically Logout After 10 Minutes Inactivity
+login::AutoLogout();
+
+// Info Variables
+page::$Info['Site'] = 'Home';
+
+// Breadcrumbstart
+crumb::Add('{lang=com.sbb.crumbs.home}', './');	
+
+// Get Rights Of User | Not Useful At This Moment
+$Group = groups::GetRights();
 
 /*// Language Chooser
 $Langs = $language->GetLanguages();
@@ -41,7 +61,10 @@ foreach($Langs as $key => $val)
 		$SelectLangs .= '<option value="'.$key.'">'.$val.'</option>';					
 }
 $tpl->Assign('Languages',$SelectLangs);*/
+
+// Just A Normal Messagebox Test
 new messagebox(MSG_BOX_TYPE_NORMAL, 'Test');
+
 // Template Stuff
 $tpl->Assign(array(
 	'Site'			=> 'Seitentitel',
@@ -51,7 +74,7 @@ $tpl->Assign(array(
 	'CSSStyles'		=> style::IncludeCSS(),
 	'Javascripts'	=> style::IncludeJS()
 ));
-page::Initial($tpl);
+
 $language->Assign($tpl);
 $tpl->Assign('SiteLoad', round(((microtime(true) - $GeneratingTime) * 1000), 2).'ms'); // Isn't optimal here
 $tpl->Display(false, true);

@@ -57,6 +57,7 @@ $this->Items['com.sbb.profile.signature']			= 'Signature';
 $this->Items['com.sbb.board.empty']					= 'Currently the Board is empty.';
 $this->Items['com.sbb.board.not_categorized']		= 'Not categorized';
 $this->Items['com.sbb.board.error.no_board']		= 'This forum doesn\'t exists';
+
 $this->Items['com.sbb.topics.error.no_topics']		= 'There are no topics.';
 
 $this->Items['com.sbb.captcha']						= 'Captcha';
@@ -64,5 +65,8 @@ $this->Items['com.sbb.captcha.wrong']				= 'Captcha is wrong!';
 
 $this->Items['com.sbb.language.changed']			= 'Your Language was changed to {$LangChangedTo}.';
 
-$this->Items['com.sbb.email.activation.title']		= 'Your Account will activated when you visit following Site: ';
+$this->Items['com.sbb.email.activation.title']		= 'Your registration will be completed if you follow this link: ';
+
+$this->Items['com.sbb.error.mysql.connecting']		= 'I cant not write Englich xD';
+$this->Items['com.sbb.error.mysql.settings']		= 'Please check the MySQL-Configuration.';
 ?>
