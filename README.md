@@ -15,7 +15,7 @@ __[irc://irc.quakenet.org/#SilexBoard](irc://irc.quakenet.org/#SilexBoard)__
 
 
 Teammitglieder
----------------
+--------------
 ### Nox Nebula
 Die Idee, ein eigenes Board zu schreiben, stammt von ihm, er ist als PHP-Programmierer, Designer und Stuffmanager am Projekt beteiligt.
 
@@ -27,3 +27,6 @@ Nut ist als PHP-Programmierer und Designer tätig.
 
 ### Angus
 Angus ist zum Team dazugekommen, er ist als PHP-Programmierer tätig.
+
+### Nico
+Will teil des Teams sein doch kann ncihtmal Git zeug einrichten.
