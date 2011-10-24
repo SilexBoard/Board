@@ -15,7 +15,7 @@ __[irc://irc.quakenet.org/#SilexBoard](irc://irc.quakenet.org/#SilexBoard)__
 
 
 Teammitglieder
---------------
+---------------
 ### Nox Nebula
 Die Idee, ein eigenes Board zu schreiben, stammt von ihm, er ist als PHP-Programmierer, Designer und Stuffmanager am Projekt beteiligt.
 
