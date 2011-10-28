@@ -27,3 +27,6 @@ Nut ist als PHP-Programmierer und Designer tätig.
 
 ### Angus
 Angus ist zum Team dazugekommen, er ist als PHP-Programmierer tätig.
+
+### Nico
+Will teil des Teams sein doch kann ncihtmal Git zeug einrichten.
