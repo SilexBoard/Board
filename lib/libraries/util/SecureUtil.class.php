@@ -14,10 +14,8 @@ class SecureUtil {
 	 * @return  string
 	 */
 	public static function EncryptPassword($Password, $Email, $Rounds = '08') {
-		if($Rounds >= 4 && $Rounds <= 31)
-			echo 'blub';
 		$string = hash_hmac('whirlpool', str_pad($Password, strlen($Password) * 4, sha1($Email), STR_PAD_BOTH), CFG_SALT, true);
-		$salt   = substr(str_shuffle('./0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 22);
+		$salt   = substr('./0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 0, 22);
 		return crypt($string, '$2a$'.$Rounds.'$'.$salt);
 	}
 
@@ -27,9 +25,12 @@ class SecureUtil {
 	 * @param   string  $Email
 	 * @param   string  $Stored     The encrypted password
 	 * @return  bool
+	 * Note: We can delet this function and use SecureUtil::EncryptPassword($Password, $Email) == $Stored) in User.class.php?
 	 */
 	public static function CheckPassword($Password, $Email, $Stored) {
-		$string = hash_hmac('whirlpool', str_pad($Password, strlen($Password) * 4, sha1($Email), STR_PAD_BOTH), CFG_SALT, true);
-		return crypt($string, substr($Stored, 0, 30)) == $Stored;
+		if(self::EncryptPassword($Password, $Email) == $Stored)
+		    return TRUE;
+		else
+		    return FALSE;
 	}
 }

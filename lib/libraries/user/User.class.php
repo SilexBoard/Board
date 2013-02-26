@@ -27,7 +27,7 @@ class User {
 		if($Type != self::GIVEN_GUEST && $Input != 0) { // This is not our guest
 			if($Type == self::GIVEN_ID) {
 				$this->ID = $Input;
-				if(!$this->Fetch())
+				if($this->Fetch()) 
 					return false;
 			}
 			else
@@ -45,10 +45,10 @@ class User {
 		
 		/* Global user templat var */
 		SBB::Template()->Assign(['user' => [
-			'name' => $this->Name,
-			'id' => $this->ID,
-			'group' => ['name' => $this->Group->Name(), 'id' => $this->Group->ID(), 'icon' => ''],
-			'color' => '',
+			'name'      => $this->Name,
+			'id'        => $this->ID,
+			'group'     => ['name' => $this->Group->Name(), 'id' => $this->Group->ID(), 'icon' => ''],
+			'color'     => '',
 			'lang_code' => '',
 			'logged_in' => $this->LoggedIn
 		]]);
@@ -61,7 +61,7 @@ class User {
 		$Row = $Result->fetch(PDO::FETCH_OBJ);
 		if(!$Row) {
 			// User does not exist
-			return false;
+            return false;
 		}
 
 		$this->FetchRow($Row);
@@ -75,7 +75,7 @@ class User {
 		$this->Name = $Row->Username;
 		$this->LoggedIn = true;
 		$this->Group = new Group((int)$Row->GroupID);
-		$this->Info['style'] = (string)$Row->Style;
+		#$this->Info['style'] = (string)$Row->Style;
 	}
 
 	/* User info */
@@ -128,7 +128,7 @@ class User {
 	 * @return mixed
 	 */
 	public function Info($Info) {
-		return isset($this->Info[$Info]) ? $this->Info[$Info] : null;
+		#return isset($this->Info[$Info]) ? $this->Info[$Info] : null; #< There is an error, you can't use array as object
 	}
 
 	public function GetLink() {
@@ -151,8 +151,16 @@ class User {
 	 */
 	public function Login() {
 
-		Session::SetUser($this->ID);
-
+		$Result = SBB::DB()->prepare('SELECT * FROM `users` WHERE `Username` = :Username');
+		$Result->execute([':Username' => $_POST['Username']]);
+		$Row = $Result->fetch(PDO::FETCH_OBJ);
+		if($Row) {
+			if(SecureUtil::CheckPassword($_POST['Password'], $Row->Email, $Row->Password)) {
+			    Session::SetUser($Row->ID);
+			}
+		} else {
+            header('location: http://google.it');
+        }
 	}
 
 	/**

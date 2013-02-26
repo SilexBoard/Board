@@ -16,8 +16,12 @@
 		<div id="user_panel_content">
 			<div class="w_size">
 				<div class="w_content_h">
-					Userpanel test thing<br>
-					With many lines<br>
+					<form method="POST">
+					<input type="text" value="0" name="Register" />
+					<input type="text" value="" name="Username" />
+					<input type="password" value="" name="Password" />
+					<input type="submit" value="Invisa" />
+					</form>
 					and<br>
 					Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 				</div>
@@ -32,7 +36,11 @@
 					{literal}{Avatar}{/literal} {$user.name}
 				</div>
 				<div class="user_menu">
-					<span id="user_panel_toggle">Login du Sack</span>
+					{if $user.logged_in}
+					    <a href="">Logout</a> <!-- Send to Logout Page -->
+					{else}
+					    <span id="user_panel_toggle">Login du Sack</span>
+					{/if}
 				</div>
 			</div>
 		</div>
